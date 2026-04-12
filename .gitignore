@@ -1,34 +1,8 @@
-# ── Data ────────────────────────────────────────────────────────────────────
-# Exclude raw/processed data files (often large or sensitive)
+# Data — exclude large dataset file
 *.csv
-*.tsv
-*.xlsx
-data/
-datasets/
 
-# ── Jupyter ──────────────────────────────────────────────────────────────────
+# Jupyter — auto-generated checkpoint folder
 .ipynb_checkpoints/
 
-# ── Python ───────────────────────────────────────────────────────────────────
-__pycache__/
-*.py[cod]
-*.pyo
-*.pyd
-.Python
-env/
-venv/
-.venv/
-*.egg-info/
-dist/
-build/
-
-# ── macOS ────────────────────────────────────────────────────────────────────
+# macOS — system metadata file
 .DS_Store
-.AppleDouble
-.LSOverride
-
-# ── IDEs ─────────────────────────────────────────────────────────────────────
-.vscode/
-.idea/
-*.swp
-*.swo
