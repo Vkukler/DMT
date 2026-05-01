@@ -18,7 +18,7 @@ predicted_mood_from_phone_activity/
 
 ## Data
 
-The raw dataset file (`dataset_mood_smartphone.csv`) is excluded from version control via `.gitignore`. To reproduce the analysis, place the CSV file in the project root before running the notebook.
+The initial dataset (`dataset_mood_smartphone.csv`) contains smartphone usage logs and self-reported mood scores from the StudentLife study. It consists of raw event logs for activities and sensor readings—such as screen time, calls, SMS, and app usage categories—recorded alongside user identifiers and timestamps. The raw dataset file is excluded from version control via `.gitignore`. To reproduce the analysis, place the CSV file in the project root before running the notebook.
 
 | Column type | Examples |
 |---|---|
@@ -48,12 +48,16 @@ The raw dataset file (`dataset_mood_smartphone.csv`) is excluded from version co
    jupyter notebook notebook.ipynb
    ```
 
-## Methods
+## Workflow
 
-- Exploratory data analysis & visualisation
-- Feature engineering from time-series smartphone logs
-- Classification / regression models to predict mood scores
-- Model evaluation (cross-validation, RMSE, accuracy)
+The analysis in the notebook (`notebook.ipynb`) follows a structured tabular modeling pipeline:
+
+1. **Preprocessing & Aggregation**: The raw event log is aggregated into a daily user-level table. Outliers are clipped using the IQR rule, and variables are aggregated per day (e.g., summed for durations/counts, averaged for continuous features).
+2. **Exploratory Data Analysis (EDA)**: Analysis of dataset statistics, post-aggregation missingness, and target class distributions.
+3. **Feature Engineering**: Data is split chronologically into train, validation, and test sets. Tabular features are constructed using daily lags (1–3 days), a 3-day rolling mean, and within-user centering. Sparse columns are removed and remaining missing values are imputed.
+4. **Classification Modeling**: Random Forest models are trained to predict next-day mood categories. This phase includes comparing different imputation methods and feature selection strategies (such as backward selection).
+5. **Numerical Prediction**: A Random Forest regressor is trained on the same tabular features to predict the continuous next-day mood score.
+6. **Evaluation**: Final models are evaluated on the held-out test set.
 
 ## Course
 
